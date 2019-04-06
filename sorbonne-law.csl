@@ -10,8 +10,9 @@
       <email>paul.heckler@univ-paris1.fr</email>
     </author>
     <category field="law"/>
-    <summary> </summary>
-    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+    <summary locale="fr">Zotero Style of the Sorbonne Student Law Review - revue juridique des étudiants de la Sorbonne https://sorbonnestudentlawreview.org</summary>
+    <summary locale="en">/ Style Zotero de la Sorbonne Student Law Review - Revue juridique des étudiants de la Sorbonne https://sorbonnestudentlawreview.org</summary>
+    <rights license="http://creativecommons.org/licenses/by-sa/4.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 License</rights>
   </info>
   <macro name="author">
               <names variable="author" suffix=", ">
