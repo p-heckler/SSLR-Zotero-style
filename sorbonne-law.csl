@@ -58,12 +58,14 @@
   </macro>
   <macro name="URL">
         <text variable="URL" prefix=", disponible en ligne sur : "/>
+        <choose>
         <if variable="accessed">
         <date form="text" variable="accessed" prefix=", (consulté le ">
         	<date-part name="day" form="long" range-delimiter=" "/>
 			<date-part name="year" suffix=")"/>
         </date>
         </if>
+      </choose>
   </macro>
   <macro name="sort-type">
    <choose>
