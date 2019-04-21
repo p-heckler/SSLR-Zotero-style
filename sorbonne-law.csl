@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" et-al-min="4" et-al-use-first="4" et-al-subsequent-min="4" et-al-subsequent-use-first="4" initialize-with="." demote-non-dropping-particle="never" default-locale="fr">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" et-al-min="4" et-al-use-first="4" et-al-subsequent-min="4" et-al-subsequent-use-first="4" initialize-with="." demote-non-dropping-particle="never">
   <info>
     <title>Sorbonne Student Law Review - Revue juridique des étudiants de la Sorbonne</title>
     <id>http://www.zotero.org/styles/sorbonne-law</id>
@@ -13,6 +13,27 @@
     <summary>Style zotero de la Sorbonne Student Law Review - revue juridique des étudiants de la Sorbonne https://sorbonnestudentlawreview.org</summary>
     <rights license="http://creativecommons.org/licenses/by-sa/4.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 License</rights>
   </info>
+  <locale xml:lang="fr-FR">
+    <terms>
+    <term name="editor" form="short">dir.</term>
+    <term name="retrieved">consulté le </term>
+    <term name="doi">DOI : </term>
+    <term name="thesis">thèse</term>
+  </terms>
+  </locale>
+  <locale xml:lang="en">
+    <terms>
+      <term name="retrieved">retrieved on </term>
+      <term name="doi">DOI: </term>
+      <term name="thesis">doctoral thesis</term>
+      <term name="open-quote">“</term>
+<term name="close-quote">”</term>
+<term name="open-inner-quote">'</term>
+<term name="close-inner-quote">'</term>
+<term name="page-range-delimiter">-</term>
+
+    </terms>
+  </locale>
   <macro name="author">
               <names variable="author" suffix=", ">
                 <name et-al-min="4" et-al-use-first="4" initialize-with="." sort-separator=" ">
@@ -29,19 +50,26 @@
               </names>
               </macro>
   <macro name="editor">
-               <names variable="editor collection-editor" suffix=" (dir.), ">
+               <names variable="editor collection-editor">
                     <name et-al-min="4" et-al-use-first="4" initialize-with="." sort-separator=" ">
                       <name-part name="family" text-case="capitalize-first" font-variant="normal"/>
                     </name>
+                    <label form="short" prefix=" (" suffix="), "/>
                   </names>
                   </macro>
 <macro name="editor-biblio">
-<names variable="editor collection-editor" suffix=" (dir.), ">
+<names variable="editor collection-editor">
 <name et-al-min="4" et-al-use-first="4" name-as-sort-order="all" initialize-with="." sort-separator=" ">
                   <name-part name="family" text-case="capitalize-first" font-variant="small-caps"/>
                   <name-part name="given" text-case="capitalize-first" font-variant="normal" prefix="(" suffix=")"/>
                 </name>
+                <label form="short" prefix=" (" suffix="), "/>
                 </names>
+</macro>
+<macro name="content-title">
+  <text term="open-quote"/>
+  <text variable="title"/>
+  <text term="close-quote" suffix=", "/>
 </macro>
   <macro name="edition">
     <choose>
@@ -56,16 +84,45 @@
       </else>
     </choose>
   </macro>
+  <macro name="volume">
+    <choose>
+      <if match="any" variable="volume">
+        <text variable="volume"/>
+      </if>
+    </choose>
+  </macro>
+  <macro name="number">
+    <choose>
+      <if match="any" variable="number">
+        <text term="issue" form="short" prefix=", "/>
+        <text variable="number" suffix=" "/>
+      </if>
+    </choose>
+  </macro>
   <macro name="URL">
-        <text variable="URL" prefix=", disponible en ligne sur : "/>
+    <choose>
+      <if match="any" variable="URL">
+    <text term="online" prefix=", " suffix=" "/>
+        <text variable="URL"/>
         <choose>
         <if variable="accessed">
-        <date form="text" variable="accessed" prefix=", (consulté le ">
+          <text term="retrieved" prefix="("/>
+        <date form="text" variable="accessed">
         	<date-part name="day" form="long" range-delimiter=" "/>
 			<date-part name="year" suffix=")"/>
         </date>
         </if>
       </choose>
+      </if>
+    </choose>
+  </macro>
+  <macro name="DOI">
+    <choose>
+      <if match="any" variable="DOI">
+        <text term="doi" prefix=", "/>
+        <text variable="DOI" prefix="https://doi.org/"/>
+      </if>
+    </choose>
   </macro>
   <macro name="sort-type">
    <choose>
@@ -99,7 +156,7 @@
           <choose>
             <if type="article-journal article-magazine article-newspaper" match="any">
               <text macro="author"/>
-              <text variable="title" text-case="capitalize-first" prefix="« " suffix=" », "/>
+<text macro="content-title"/>
               <choose>
                 <if match="any" variable="container-title-short">
                   <text variable="container-title" font-style="italic" suffix=", "/>
@@ -111,11 +168,7 @@
               <date form="text" variable="issued">
                 <date-part name="day" range-delimiter=" "/>
               </date>
-              <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" prefix=", vol. "/>
-                </if>
-              </choose>
+                  <text macro="volume" prefix=", vol. "/>
               <choose>
                 <if match="any" variable="issue">
                   <text term="issue" form="short" prefix=", " suffix=" "/>
@@ -132,33 +185,22 @@
                   <text variable="page" prefix=", p. "/>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="DOI">
-                  <text variable="DOI" prefix=", DOI : "/>
-                </if>
-              </choose>
-              <choose>
-                <if match="any" variable="URL">
+              <text macro="DOI"/>
                   <text macro="URL"/>
-                </if>
-              </choose>
             </if>
             <else-if type="thesis" match="any">
 <text macro="author"/>
-              <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", thèse, "/>
+              <text variable="title" text-case="capitalize-first" font-style="italic"/>
+              <text term="thesis" prefix=", "/>
                 <choose>
-                <if match="any" variable="event-place">
-                  <text variable="event-place" text-case="capitalize-first" prefix=", "/>
+                <if match="any" variable="publisher">
+                  <text variable="publisher" text-case="capitalize-first" prefix=", "/>
                 </if>
               </choose>
-              <date form="text" variable="issued">
+              <date form="text" variable="issued" prefix=", ">
                 <date-part name="day" range-delimiter=" "/>
               </date>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
             <else-if type="book" match="any">
               <choose>
@@ -170,11 +212,7 @@
                 </else>
               </choose>
               <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
-              <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" prefix="vol. " suffix=", "/>
-                </if>
-              </choose>
+              <text macro="volume" prefix="vol. " suffix=", "/>
               <choose>
                 <if match="any" variable="event-place">
                   <text variable="event-place" text-case="capitalize-first"/>
@@ -198,7 +236,8 @@
                   <text variable="collection-title" text-case="capitalize-first" prefix=", coll. "/>
                   <choose>
                     <if match="any" variable="collection-number">
-                      <text variable="collection-number" prefix=", n° "/>
+                      <text term="issue" form="short" prefix=", "/>
+                      <text variable="collection-number" suffix=" "/>
                     </if>
                   </choose>
                 </if>
@@ -212,15 +251,12 @@
                   </names>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
             <else-if type="chapter paper-conference" match="any">
               <text macro="author"/>
-              <text variable="title" text-case="capitalize-first" prefix="« " suffix=" », dans "/>
+              <text macro="content-title"/>
+              <text term="in" font-style="italic" suffix=" "/>
               <choose>
                 <if match="any" variable="editor collection-editor">
 <text macro="editor"/>
@@ -242,7 +278,8 @@
                   <text variable="collection-title" text-case="capitalize-first" prefix=", coll. "/>
                   <choose>
                     <if match="any" variable="collection-number">
-                      <text variable="collection-number" prefix=", n° "/>
+                      <text term="issue" form="short" prefix=", "/>
+                      <text variable="collection-number" suffix=" "/>
                     </if>
                   </choose>
                 </if>
@@ -255,11 +292,7 @@
               <date form="text" variable="issued" prefix=", ">
                 <date-part name="month" form="short" range-delimiter=" "/>
               </date>
-              <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" prefix=", vol. "/>
-                </if>
-              </choose>
+                  <text macro="volume" prefix=", vol. "/>
               <choose>
                 <if match="any" variable="translator">
                   <names variable="translator" prefix=", trad. ">
@@ -270,11 +303,7 @@
                 </if>
               </choose>
               <text variable="page" prefix=", p. "/>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
             <else-if type="entry-encyclopedia entry-dictionary" match="any">
             <choose>
@@ -282,7 +311,8 @@
             <text macro="author"/>
             </if>
             </choose>
-              <text variable="title" text-case="capitalize-first" prefix="« " suffix=" », dans "/>
+              <text macro="content-title"/>
+              <text term="in" font-style="italic" suffix=" "/>
               <choose>
               <if match="any" variable="editor collection-editor">
               <text macro="editor"/>
@@ -302,16 +332,8 @@
               <date form="text" variable="issued">
                 <date-part name="month" form="short" range-delimiter=" "/>
               </date>
-                            <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" prefix=", vol. " suffix=", "/>
-                </if>
-              </choose>
-              <choose>
-                <if match="any" variable="URL">
-                  <text variable="URL" prefix="disponible en ligne sur : "/>
-                </if>
-              </choose>
+                  <text macro="volume" prefix=", vol. " suffix=", "/>
+                  <text macro="URL"/>
               <choose>
                 <if match="any" variable="accessed">
                   <date form="text" variable="accessed" prefix=" (consulté le " suffix=")">
@@ -335,24 +357,12 @@
               <date form="text" variable="issued">
                 <date-part name="day" range-delimiter=" "/>
               </date>
-              <choose>
-                <if match="any" variable="number">
-                  <text variable="number" prefix=", n° "/>
-                </if>
-              </choose>
-              <choose>
-                <if match="any" variable="URL">
-                  <text variable="URL" prefix=", "/>
-                </if>
-              </choose>
+              <text macro="number"/>
+          <text macro="URL"/>
               <choose>
                 <if match="any" variable="container-title">
                   <text variable="container-title" font-style="italic" prefix=", "/>
-                  <choose>
-                    <if match="any" variable="volume">
-                      <text variable="volume" prefix=" "/>
-                    </if>
-                  </choose>
+                      <text macro="volume" prefix=" "/>
                 </if>
               </choose>
             </else-if>
@@ -372,11 +382,7 @@
                    <text variable="container-title" font-style="italic" suffix=", "/>
                    </if>
                    </choose>
-              <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" suffix=", "/>
-                </if>
-              </choose>
+                  <text macro="volume" suffix=", "/>
               <date form="text" variable="issued" suffix=", ">
                 <date-part name="month" form="short" range-delimiter=" "/>
               </date>
@@ -385,11 +391,7 @@
                   <text variable="page" prefix="p. "/>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
               <choose>
                 <if match="all" variable="title-short">
                   <text variable="title-short" text-case="capitalize-first" prefix=", ci-après "/>
@@ -411,10 +413,16 @@
               <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
               <choose>
                 <if match="any" variable="genre">
-                  <text variable="genre" suffix=", "/>
+                  <text variable="genre" suffix=" "/>
                 </if>
                    </choose>
-              <date form="text" date-parts="year-month-day" variable="issued">
+                   <choose>
+                     <if match="any" variable="number">
+                       <text term="issue" suffix=" "/>
+                       <text variable="number"/>
+                     </if>
+                   </choose>
+              <date form="text" date-parts="year-month-day" variable="issued" prefix=", ">
                 <date-part name="month" form="short" range-delimiter=" "/>
               </date>
               <choose>
@@ -428,11 +436,6 @@
                 </if>
               </choose>
               <choose>
-                <if match="any" variable="number">
-                  <text variable="number" prefix=", n° "/>
-                </if>
-              </choose>
-              <choose>
                 <if match="any" variable="translator">
                   <names variable="translator" prefix=", " suffix=" (trad.)">
                     <name et-al-min="4" et-al-use-first="4" name-as-sort-order="all" sort-separator=" ">
@@ -441,11 +444,7 @@
                   </names>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
             <else-if type="post-weblog webpage entry post article personal_communication" match="any">
               <choose>
@@ -467,11 +466,7 @@
                   <text variable="container-title" text-case="capitalize-first" prefix=", "/>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="URL">
                     <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
           </choose>
         </if>
@@ -488,11 +483,7 @@
               <date form="text" date-parts="year-month-day" variable="issued">
                 <date-part name="month" form="short" range-delimiter=" "/>
               </date>
-              <choose>
-                <if match="any" variable="number">
-                  <text variable="number" prefix=", n° "/>
-                </if>
-              </choose>
+<text macro="number"/>
             <text value="op. cit." font-style="italic" suffix=" note "/>
               <text variable="first-reference-note-number"/>
             </if>
@@ -522,10 +513,12 @@
             <else-if type="article-journal article article-magazine article-newspaper chapter paper-conference" match="any">
               <text macro="author"/>
               <if match="any" variable="title-short">
-            <text variable="title-short" prefix="« " suffix=" », "/>
+                <text term="open-quote"/>
+            <text variable="title-short"/>
+            <text term="close-quote" suffix=", "/>
             </if>
             <else>
-            <text variable="title" prefix="« " suffix=" », "/>
+            <text macro="content-title"/>
             </else>
 <text value="op. cit." font-style="italic" suffix=" note "/>
               <text variable="first-reference-note-number"/>
@@ -583,7 +576,7 @@
     <choose>
          <if type="article-journal article-magazine article-newspaper" match="any">
               <text macro="author-biblio"/>
-              <text variable="title" text-case="capitalize-first" prefix="« " suffix=" », "/>
+              <text macro="content-title"/>
               <choose>
                 <if match="any" variable="container-title-short">
                   <text variable="container-title" font-style="italic" suffix=", "/>
@@ -595,11 +588,7 @@
               <date form="text" variable="issued">
                 <date-part name="day" range-delimiter=" "/>
               </date>
-              <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" prefix=", vol. "/>
-                </if>
-              </choose>
+                  <text macro="volume" prefix=", vol. "/>
               <choose>
                 <if match="any" variable="issue">
                   <text term="issue" form="short" prefix=", " suffix=" "/>
@@ -616,34 +605,23 @@
                   <text variable="page" prefix=", p. "/>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="DOI">
-                  <text variable="DOI" prefix=", DOI : "/>
-                </if>
-              </choose>
-              <choose>
-                <if match="any" variable="URL">
+              <text macro="DOI"/>
                   <text macro="URL"/>
-                </if>
-              </choose>
             </if>
             <else-if type="thesis" match="any">
 <text macro="author-biblio"/>
-              <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", thèse, "/>
+              <text variable="title" text-case="capitalize-first" font-style="italic"/>
+              <text term="thesis" prefix=", "/>
                 <choose>
-                <if match="any" variable="event-place">
-                  <text variable="event-place" text-case="capitalize-first" prefix=", "/>
+                <if match="any" variable="publisher">
+                  <text variable="publisher" text-case="capitalize-first" prefix=", "/>
                 </if>
               </choose>
-              <date form="text" variable="issued">
+              <date form="text" variable="issued" prefix=", ">
                 <date-part name="day" range-delimiter=" "/>
               </date>
             <text variable="number-of-pages" prefix=", " suffix=" pages."/>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
             <else-if type="book" match="any">
               <choose>
@@ -655,11 +633,7 @@
                 </else>
               </choose>
               <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
-              <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" prefix="vol. " suffix=", "/>
-                </if>
-              </choose>
+                  <text macro="volume" prefix="vol. " suffix=", "/>
               <choose>
                 <if match="any" variable="event-place">
                   <text variable="event-place" text-case="capitalize-first"/>
@@ -683,7 +657,8 @@
                   <text variable="collection-title" text-case="capitalize-first" prefix=", coll. "/>
                   <choose>
                     <if match="any" variable="collection-number">
-                      <text variable="collection-number" prefix=", n° "/>
+                      <text term="issue" form="short" prefix=", "/>
+                      <text variable="collection-number" suffix=" "/>
                     </if>
                   </choose>
                 </if>
@@ -698,15 +673,12 @@
                 </if>
               </choose>
               <text variable="number-of-pages" prefix=", " suffix=" pages."/>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
             <else-if type="chapter paper-conference" match="any">
               <text macro="author-biblio"/>
-              <text variable="title" text-case="capitalize-first" prefix="« " suffix=" », dans "/>
+              <text macro="content-title"/>
+              <text term="in" font-style="italic" suffix=" "/>
               <choose>
                 <if match="any" variable="editor collection-editor">
 <text macro="editor-biblio"/>
@@ -728,7 +700,8 @@
                   <text variable="collection-title" text-case="capitalize-first" prefix=", coll. "/>
                   <choose>
                     <if match="any" variable="collection-number">
-                      <text variable="collection-number" prefix=", n° "/>
+                      <text term="issue" form="short" prefix=", "/>
+                      <text variable="collection-number" suffix=" "/>
                     </if>
                   </choose>
                 </if>
@@ -741,11 +714,7 @@
               <date form="text" variable="issued" prefix=", ">
                 <date-part name="month" form="short" range-delimiter=" "/>
               </date>
-              <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" prefix=", vol. "/>
-                </if>
-              </choose>
+                  <text macro="volume" prefix=", vol. "/>
               <choose>
                 <if match="any" variable="translator">
                   <names variable="translator" prefix=", trad. ">
@@ -756,11 +725,7 @@
                 </if>
               </choose>
               <text variable="page" prefix=", p. "/>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
             <else-if type="entry-encyclopedia entry-dictionary" match="any">
             <choose>
@@ -768,7 +733,8 @@
             <text macro="author-biblio"/>
             </if>
             </choose>
-              <text variable="title" text-case="capitalize-first" prefix="« " suffix=" », dans "/>
+              <text macro="content-title"/>
+              <text term="in" font-style="italic" suffix=" "/>
               <choose>
               <if match="any" variable="editor collection-editor">
               <text macro="editor-biblio"/>
@@ -788,16 +754,8 @@
               <date form="text" variable="issued">
                 <date-part name="month" form="short" range-delimiter=" "/>
               </date>
-                            <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" prefix=", vol. " suffix=", "/>
-                </if>
-              </choose>
-              <choose>
-                <if match="any" variable="URL">
-                  <text variable="URL" prefix="disponible en ligne sur : "/>
-                </if>
-              </choose>
+                  <text macro="volume" prefix=", vol. " suffix=", "/>
+              <text macro="URL"/>
               <choose>
                 <if match="any" variable="accessed">
                   <date form="text" variable="accessed" prefix=" (consulté le " suffix=")">
@@ -821,24 +779,12 @@
               <date form="text" variable="issued">
                 <date-part name="day" range-delimiter=" "/>
               </date>
-              <choose>
-                <if match="any" variable="number">
-                  <text variable="number" prefix=", n° "/>
-                </if>
-              </choose>
-              <choose>
-                <if match="any" variable="URL">
-                  <text variable="URL" prefix=", "/>
-                </if>
-              </choose>
+<text macro="number"/>
+                  <text macro="URL"/>
               <choose>
                 <if match="any" variable="container-title">
                   <text variable="container-title" font-style="italic" prefix=", "/>
-                  <choose>
-                    <if match="any" variable="volume">
-                      <text variable="volume" prefix=" "/>
-                    </if>
-                  </choose>
+                      <text macro="volume" prefix=" "/>
                 </if>
               </choose>
             </else-if>
@@ -858,11 +804,7 @@
                    <text variable="container-title" font-style="italic" suffix=", "/>
                    </if>
                    </choose>
-              <choose>
-                <if match="any" variable="volume">
-                  <text variable="volume" suffix=", "/>
-                </if>
-              </choose>
+                  <text macro="volume" suffix=", "/>
               <date form="text" variable="issued" suffix=", ">
                 <date-part name="month" form="short" range-delimiter=" "/>
               </date>
@@ -871,11 +813,7 @@
                   <text variable="page" prefix="p. "/>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
               <choose>
                 <if match="all" variable="title-short">
                   <text variable="title-short" text-case="capitalize-first" prefix=", ci-après "/>
@@ -913,11 +851,7 @@
                   <text variable="publisher" text-case="capitalize-first" prefix=", "/>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="number">
-                  <text variable="number" prefix=", n° "/>
-                </if>
-              </choose>
+<text macro="number"/>
               <choose>
                 <if match="any" variable="translator">
                   <names variable="translator" prefix=", " suffix=" (trad.)">
@@ -927,11 +861,7 @@
                   </names>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="URL">
                   <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
             <else-if type="post-weblog webpage entry post article personal_communication" match="any">
               <choose>
@@ -953,11 +883,7 @@
                   <text variable="container-title" text-case="capitalize-first" prefix=", "/>
                 </if>
               </choose>
-              <choose>
-                <if match="any" variable="URL">
                     <text macro="URL"/>
-                </if>
-              </choose>
             </else-if>
           </choose>
           </layout>
