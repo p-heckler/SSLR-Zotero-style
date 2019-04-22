@@ -1,3 +1,5 @@
+* Read this file in [english] (/readme-en.md)
+
 # Style Zotero de la Sorbonne Student Law Review - Revue juridique des étudiants de la Sorbonne
 
  Ce projet a vocation à élaborer un style zotero conforme au mode de référencement de la  Sorbonne Student Law Review - Revue juridique des étudiants de la Sorbonne (https://sorbonnestudentlawreview.org/charters/charte-fr.pdf).
