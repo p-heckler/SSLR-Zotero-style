@@ -1,4 +1,4 @@
-* Read this file in [english](./readme-en.md)
+* Read this file in [english](./readme-en.md)*
 
 # Style Zotero de la Sorbonne Student Law Review - Revue juridique des étudiants de la Sorbonne
 
