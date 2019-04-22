@@ -1,3 +1,4 @@
+*lire ce texte en [français](./README.md)*
 # Zotero Style of the Sorbonne Student Law Review
 
 This project aims at developping a zotero stylesheet compatible with the Sorbonne Student Law Review citation style (https://sorbonnestudentlawreview.org/charters/charte-en.pdf). 
