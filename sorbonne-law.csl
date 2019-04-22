@@ -16,20 +16,19 @@
   <locale xml:lang="fr-FR">
     <terms>
     <term name="editor" form="short">dir.</term>
-    <term name="retrieved">consulté le </term>
+    <term name="retrieved">consulté le</term>
     <term name="presented at">thèse,</term>
   </terms>
   </locale>
   <locale xml:lang="en">
     <terms>
-      <term name="retrieved">retrieved on </term>
-      <term name="presented at">doctoral thesis, </term>
+      <term name="retrieved">retrieved on</term>
+      <term name="presented at">doctoral thesis,</term>
       <term name="open-quote">“</term>
 <term name="close-quote">”</term>
 <term name="open-inner-quote">'</term>
 <term name="close-inner-quote">'</term>
 <term name="page-range-delimiter">-</term>
-
     </terms>
   </locale>
   <macro name="author">
@@ -97,14 +96,25 @@
       </if>
     </choose>
   </macro>
+  <macro name="date">
+    <choose>
+      <if match="any" variable="issued">
+        <date form="text" variable="issued">
+        </date>
+      </if>
+      <else>
+      <text term="no date"/>
+      </else>
+    </choose>
+  </macro>
   <macro name="url">
     <choose>
       <if match="any" variable="URL">
     <text term="online" prefix=", " suffix=" "/>
         <text variable="URL"/>
         <choose>
-        <if variable="accessed">
-          <text term="retrieved" prefix=" ("/>
+        <if match="any" variable="accessed">
+          <text term="retrieved" prefix=" (" suffix=" "/>
         <date form="text" variable="accessed">
         	<date-part name="day" range-delimiter=" "/>
 			<date-part name="year"/>
@@ -165,15 +175,13 @@
               <text macro="content-title"/>
               <choose>
                 <if match="any" variable="container-title-short">
-                  <text variable="container-title" font-style="italic" suffix=", "/>
+                  <text variable="container-title-short" font-style="italic" suffix=", "/>
                 </if>
                 <else>
                   <text variable="container-title" text-case="capitalize-first" font-style="italic" suffix=", "/>
                 </else>
               </choose>
-              <date form="text" variable="issued">
-                <date-part name="day" range-delimiter=" "/>
-              </date>
+              <text macro="date"/>
                   <text macro="volume" prefix=", vol. "/>
               <choose>
                 <if match="any" variable="issue">
@@ -196,12 +204,10 @@
               <text term="presented at" prefix=", "/>
                 <choose>
                 <if match="any" variable="publisher">
-                  <text variable="publisher" text-case="capitalize-first" prefix=" "/>
+                  <text variable="publisher" text-case="capitalize-first" prefix=" " suffix=", "/>
                 </if>
               </choose>
-              <date form="text" variable="issued" prefix=", ">
-                <date-part name="day" range-delimiter=" "/>
-              </date>
+              <text macro="date"/>
                   <text macro="url"/>
             </else-if>
             <else-if type="book" match="any">
@@ -230,9 +236,7 @@
 <text macro="edition" suffix=", "/>
                 </if>
               </choose>
-              <date form="text" variable="issued">
-                <date-part name="month" form="short" range-delimiter=" "/>
-              </date>
+              <text macro="date"/>
               <choose>
                 <if match="any" variable="collection-title">
                   <text variable="collection-title" text-case="capitalize-first" prefix=", coll. "/>
@@ -291,9 +295,7 @@
 <text macro="edition" prefix=", "/>
                 </if>
               </choose>
-              <date form="text" variable="issued" prefix=", ">
-                <date-part name="month" form="short" range-delimiter=" "/>
-              </date>
+              <text macro="date" prefix=", "/>
                   <text macro="volume" prefix=", vol. "/>
               <choose>
                 <if match="any" variable="translator">
@@ -331,18 +333,9 @@
                   <text variable="collection-number" suffix=",  "/>
                 </if>
               </choose>
-              <date form="text" variable="issued">
-                <date-part name="month" form="short" range-delimiter=" "/>
-              </date>
+              <text macro="date"/>
                   <text macro="volume" prefix=", vol. " suffix=", "/>
                   <text macro="url"/>
-              <choose>
-                <if match="any" variable="accessed">
-                  <date form="text" variable="accessed" prefix=" (consulté le " suffix=")">
-                    <date-part name="month" form="short" range-delimiter=" "/>
-                  </date>
-                </if>
-              </choose>
             </else-if>
             <else-if type="legal_case" match="any">
             <text variable="authority"/>
@@ -355,10 +348,7 @@
             <text variable="title-short" font-style="italic" prefix=", "/>
             </else-if>
             </choose>
-            <text value=", "/>
-              <date form="text" variable="issued">
-                <date-part name="day" range-delimiter=" "/>
-              </date>
+            <text macro="date" prefix=", "/>
               <text macro="number"/>
           <text macro="url"/>
               <choose>
@@ -385,9 +375,7 @@
                    </if>
                    </choose>
                   <text macro="volume" suffix=", "/>
-              <date form="text" variable="issued">
-                <date-part name="month" form="short" range-delimiter=" "/>
-              </date>
+<text macro="date"/>
 <text macro="page"/>
                   <text macro="url"/>
               <choose>
@@ -411,18 +399,16 @@
               <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
               <choose>
                 <if match="any" variable="genre">
-                  <text variable="genre" suffix=" "/>
+                  <text variable="genre"/>
                 </if>
                    </choose>
                    <choose>
                      <if match="any" variable="number">
-                       <text term="issue" suffix=" "/>
+                       <text term="issue" form="short" prefix=" " suffix=" "/>
                        <text variable="number"/>
                      </if>
                    </choose>
-              <date form="text" date-parts="year-month-day" variable="issued" prefix=", ">
-                <date-part name="month" form="short" range-delimiter=" "/>
-              </date>
+<text macro="date" prefix=", "/>
               <choose>
                 <if match="any" variable="event-place">
                   <text variable="event-place" text-case="capitalize-first" prefix=", "/>
@@ -450,10 +436,8 @@
 <text macro="author"/>
                 </if>
               </choose>
-              <text variable="title" text-case="capitalize-first" font-style="italic"/>
-              <date form="text" variable="issued" prefix=", ">
-                <date-part name="month" form="long" range-delimiter=" "/>
-              </date>
+              <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
+              <text macro="date"/>
               <choose>
                 <if match="any" variable="event-place">
                   <text variable="event-place" text-case="capitalize-first" prefix=", "/>
@@ -585,9 +569,7 @@
                   <text variable="container-title" text-case="capitalize-first" font-style="italic" suffix=", "/>
                 </else>
               </choose>
-              <date form="text" variable="issued">
-                <date-part name="day" range-delimiter=" "/>
-              </date>
+              <text macro="date"/>
                   <text macro="volume" prefix=", vol. "/>
               <choose>
                 <if match="any" variable="issue">
@@ -752,13 +734,6 @@
               </date>
                   <text macro="volume" prefix=", vol. " suffix=", "/>
               <text macro="url"/>
-              <choose>
-                <if match="any" variable="accessed">
-                  <date form="text" variable="accessed" prefix=" (consulté le " suffix=")">
-                    <date-part name="month" form="short" range-delimiter=" "/>
-                  </date>
-                </if>
-              </choose>
             </else-if>
             <else-if type="legal_case" match="any">
             <text variable="authority"/>
@@ -771,10 +746,7 @@
             <text variable="title-short" font-style="italic" prefix=", "/>
             </else-if>
             </choose>
-            <text value=", "/>
-              <date form="text" variable="issued">
-                <date-part name="day" range-delimiter=" "/>
-              </date>
+            <text macro="date" prefix=", "/>
 <text macro="number"/>
                   <text macro="url"/>
               <choose>
