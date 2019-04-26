@@ -198,7 +198,7 @@
             <if type="article-journal article-magazine article-newspaper" match="any">
               <text macro="author"/>
               <text macro="content-title"/>
-              <text macro="container-title-journal"/>
+              <text macro="container-title-italic"/>
               <text macro="date"/>
               <text macro="volume" prefix=", vol. "/>
               <choose>
@@ -335,6 +335,7 @@
                   <text variable="collection-number" suffix=",  "/>
                 </if>
               </choose>
+              <text macro="edition" suffix=", "/>
               <text macro="date"/>
               <text macro="volume" prefix=", vol. " suffix=", "/>
               <text macro="url"/>
@@ -551,7 +552,7 @@
         <if type="article-journal article-magazine article-newspaper" match="any">
           <text macro="author-biblio"/>
           <text macro="content-title"/>
-          <text macro="container-title-journal"/>
+          <text macro="container-title-italic"/>
           <text macro="date"/>
           <text macro="volume" prefix=", vol. "/>
           <choose>
@@ -690,6 +691,7 @@
               <text variable="collection-number" suffix=",  "/>
             </if>
           </choose>
+          <text macro="edition" suffix=", "/>
           <text macro="date"/>
           <text macro="volume" prefix=", vol. " suffix=", "/>
           <text macro="url"/>
