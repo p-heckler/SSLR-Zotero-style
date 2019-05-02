@@ -250,22 +250,22 @@
                 </if>
               </choose>
               <choose>
+                <if match="any" variable="collection-title">
+                  <text variable="collection-title" text-case="capitalize-first" prefix="coll. "/>
+                  <choose>
+                    <if match="any" variable="collection-number">
+                      <text term="issue" form="short" prefix=", "/>
+                      <text variable="collection-number" suffix=", "/>
+                    </if>
+                  </choose>
+                </if>
+              </choose>
+              <choose>
                 <if match="any" variable="edition">
                   <text macro="edition" suffix=", "/>
                 </if>
               </choose>
               <text macro="date"/>
-              <choose>
-                <if match="any" variable="collection-title">
-                  <text variable="collection-title" text-case="capitalize-first" prefix=", coll. "/>
-                  <choose>
-                    <if match="any" variable="collection-number">
-                      <text term="issue" form="short" prefix=", "/>
-                      <text variable="collection-number" suffix=" "/>
-                    </if>
-                  </choose>
-                </if>
-              </choose>
               <text macro="translator"/>
               <text macro="url"/>
             </else-if>
