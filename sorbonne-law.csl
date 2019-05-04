@@ -42,7 +42,7 @@
         </names>
       </if>
       <else>
-        <text term="anonymous"/>
+        <text term="anonymous" suffix=", "/>
       </else>
     </choose>
   </macro>
