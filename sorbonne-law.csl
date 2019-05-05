@@ -254,7 +254,7 @@
                   <text variable="collection-title" text-case="capitalize-first" prefix="coll. "/>
                   <choose>
                     <if match="any" variable="collection-number">
-                      <text term="issue" form="short" prefix=", "/>
+                      <text term="issue" form="short" prefix=", " suffix=" "/>
                       <text variable="collection-number" suffix=", "/>
                     </if>
                   </choose>
@@ -399,10 +399,10 @@
                   <text variable="publisher" text-case="capitalize-first" suffix=", "/>
                 </else-if>
               </choose>
-              <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
+              <text variable="title" text-case="capitalize-first" font-style="italic"/>
               <choose>
                 <if match="any" variable="genre">
-                  <text variable="genre"/>
+                  <text variable="genre" prefix=", "/>
                 </if>
               </choose>
               <choose>
