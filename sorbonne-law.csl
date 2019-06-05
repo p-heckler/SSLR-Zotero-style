@@ -58,12 +58,16 @@
     </choose>
   </macro>
   <macro name="author-biblio">
+    <choose>
+      <if match="any" variable="author">
     <names variable="author" suffix=", ">
       <name et-al-min="4" et-al-use-first="4" name-as-sort-order="all" initialize-with="." sort-separator=" ">
         <name-part name="family" text-case="capitalize-first" font-variant="small-caps"/>
         <name-part name="given" text-case="capitalize-first" font-variant="normal" prefix="(" suffix=")"/>
       </name>
     </names>
+  </if>
+</choose>
   </macro>
   <macro name="editor">
     <names variable="editor collection-editor">
@@ -312,11 +316,7 @@
               <text macro="url"/>
             </else-if>
             <else-if type="entry-encyclopedia entry-dictionary" match="any">
-              <choose>
-                <if match="any" variable="author">
                   <text macro="author"/>
-                </if>
-              </choose>
               <text macro="content-title"/>
               <text term="in" font-style="italic" suffix=" "/>
               <choose>
@@ -463,13 +463,14 @@
               <text variable="first-reference-note-number"/>
             </if>
             <else-if type="entry-encyclopedia entry-dictionary" match="any">
-              <text variable="container-title-short" font-style="italic" suffix=", "/>
+              <text macro="author"/>
+              <text macro="content-title"/>
               <choose>
                 <if match="any" variable="collection-title">
                   <text variable="collection-title" text-case="capitalize-first" font-style="italic" suffix=", "/>
                 </if>
               </choose>
-              <text value="op. cit." font-style="italic" prefix=", " suffix=" note "/>
+              <text value="op. cit." font-style="italic" suffix=" note "/>
               <text variable="first-reference-note-number"/>
             </else-if>
             <else-if type="book thesis" match="any">
@@ -668,11 +669,7 @@
           <text macro="url"/>
         </else-if>
         <else-if type="entry-encyclopedia entry-dictionary" match="any">
-          <choose>
-            <if match="any" variable="author">
-              <text macro="author-biblio"/>
-            </if>
-          </choose>
+            <text macro="author-biblio"/>
           <text macro="content-title"/>
           <text term="in" font-style="italic" suffix=" "/>
           <choose>
