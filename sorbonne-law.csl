@@ -41,9 +41,9 @@
           </name>
         </names>
       </if>
-      <else>
+      <else-if match="none" variable="editor collection-editor">
         <text term="anonymous" suffix=", "/>
-      </else>
+      </else-if>
     </choose>
   </macro>
   <macro name="translator">
