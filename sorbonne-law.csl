@@ -255,10 +255,10 @@
               </choose>
               <choose>
                 <if match="any" variable="collection-title">
-                  <text variable="collection-title" text-case="capitalize-first" prefix="coll. "/>
+                  <text variable="collection-title" text-case="capitalize-first" prefix="coll. " suffix=", "/>
                   <choose>
                     <if match="any" variable="collection-number">
-                      <text term="issue" form="short" prefix=", " suffix=" "/>
+                      <text term="issue" form="short" suffix=" "/>
                       <text variable="collection-number" suffix=", "/>
                     </if>
                   </choose>
@@ -337,7 +337,8 @@
               </choose>
               <text macro="edition" suffix=", "/>
               <text macro="date"/>
-              <text macro="volume" prefix=", vol. " suffix=", "/>
+              <text macro="volume" prefix=", vol. "/>
+              <text macro="page"/>
               <text macro="url"/>
             </else-if>
             <else-if type="legal_case" match="any">
@@ -690,7 +691,8 @@
           </choose>
           <text macro="edition" suffix=", "/>
           <text macro="date"/>
-          <text macro="volume" prefix=", vol. " suffix=", "/>
+          <text macro="volume" prefix=", vol. "/>
+          <text macro="page"/>
           <text macro="url"/>
         </else-if>
         <else-if type="legal_case" match="any">
