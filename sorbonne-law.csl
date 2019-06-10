@@ -177,7 +177,9 @@
   <macro name="number">
     <choose>
       <if match="any" variable="number">
-        <text term="issue" form="short" prefix=", "/>
+        <choose>
+        <if is-numeric="number">
+        <text term="issue" form="short" prefix=", " suffix=" "/>
         <text variable="number"/>
         <choose>
           <if match="any" type="review report">
@@ -185,7 +187,12 @@
           </if>
         </choose>
       </if>
+      <else>
+        <text variable="number" prefix=", "/>
+      </else>
     </choose>
+  </if>
+</choose>
   </macro>
   <macro name="date">
     <choose>
