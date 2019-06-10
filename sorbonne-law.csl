@@ -200,14 +200,17 @@
   <macro name="url">
     <choose>
       <if match="any" variable="URL">
-        <text term="online" prefix=", " suffix="&#160;"/>
-        <text variable="URL"/>
         <choose>
           <if match="any" variable="accessed">
+            <text term="online" prefix=", " suffix="&#160;"/>
+            <text variable="URL"/>
             <text term="retrieved" prefix=" (" suffix=" "/>
             <date form="text" variable="accessed"></date>
             <text value=")"/>
           </if>
+          <else>
+            <text variable="URL" prefix=", "/>
+          </else>
         </choose>
       </if>
     </choose>
