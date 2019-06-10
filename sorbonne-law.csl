@@ -169,6 +169,19 @@
       </if>
     </choose>
   </macro>
+  <macro name="legislation-report">
+    <choose>
+      <if variable="volume">
+    <text term="issue" form="short" suffix=" "/>
+    <text macro="volume" suffix=", "/>
+  </if>
+</choose>
+<choose>
+  <if variable="section">
+    <text variable="section" suffix=", "/>
+  </if>
+</choose>
+  </macro>
   <macro name="sort-type">
     <choose>
       <if type=" entry-encyclopedia entry-dictionary" match="any">
@@ -378,7 +391,7 @@
                   <text variable="container-title" font-style="italic" suffix=", "/>
                 </if>
               </choose>
-              <text macro="volume" suffix=", "/>
+              <text macro="legislation-report"/>
               <text macro="date"/>
               <text macro="page"/>
               <text macro="url"/>
@@ -732,7 +745,7 @@
               <text variable="container-title" font-style="italic" suffix=", "/>
             </if>
           </choose>
-          <text macro="volume" suffix=", "/>
+          <text macro="legislation-report"/>
           <text macro="date"/>
           <text macro="page"/>
           <text macro="url"/>
