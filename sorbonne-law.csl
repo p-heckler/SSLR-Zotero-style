@@ -178,7 +178,12 @@
     <choose>
       <if match="any" variable="number">
         <text term="issue" form="short" prefix=", "/>
-        <text variable="number" suffix=" "/>
+        <text variable="number"/>
+        <choose>
+          <if match="any" type="review report">
+            <text value=" "/>
+          </if>
+        </choose>
       </if>
     </choose>
   </macro>
@@ -332,50 +337,24 @@
             </else-if>
             <else-if type="legal_case" match="any">
               <text variable="authority"/>
-              <choose>
-                <if variable="title" match="any">
                   <text variable="title" font-style="italic" prefix=", "/>
                   <text variable="title-short" font-style="italic" prefix=" (ci-après " suffix=")"/>
-                </if>
-                <else-if variable="title-short" match="any">
-                  <text variable="title-short" font-style="italic" prefix=", "/>
-                </else-if>
-              </choose>
               <text macro="date" prefix=", "/>
               <text macro="number"/>
+              <text variable="container-title" font-style="italic" prefix=", "/>
+              <text macro="volume" prefix=" vol. "/>
+              <text macro="page"/>
               <text macro="url"/>
-              <choose>
-                <if match="any" variable="container-title">
-                  <text variable="container-title" font-style="italic" prefix=", "/>
-                  <text macro="volume" prefix=" "/>
-                </if>
-              </choose>
             </else-if>
             <else-if type="bill legislation" match="any">
-              <choose>
-                <if match="any" variable="number">
-                  <text variable="number" text-case="capitalize-first" suffix=" "/>
-                </if>
-              </choose>
-              <choose>
-                <if match="any" variable="title">
-                  <text variable="title" suffix=", "/>
-                </if>
-              </choose>
-              <choose>
-                <if match="any" variable="container-title">
-                  <text variable="container-title" font-style="italic" suffix=", "/>
-                </if>
-              </choose>
+              <text variable="number" text-case="capitalize-first" suffix=" "/>
+              <text variable="title" suffix=", "/>
+              <text variable="container-title" font-style="italic" suffix=", "/>
               <text macro="legislation-report"/>
               <text macro="date"/>
               <text macro="page"/>
               <text macro="url"/>
-              <choose>
-                <if match="all" variable="title-short">
-                  <text variable="title-short" text-case="capitalize-first" prefix=", ci-après "/>
-                </if>
-              </choose>
+              <text variable="title-short" text-case="capitalize-first" prefix=", ci-après "/>
             </else-if>
             <else-if type="review report" match="any">
               <choose>
@@ -390,11 +369,7 @@
                 </else-if>
               </choose>
               <text variable="title" text-case="capitalize-first" font-style="italic"/>
-              <choose>
-                <if match="any" variable="genre">
-                  <text variable="genre" prefix=", "/>
-                </if>
-              </choose>
+              <text variable="genre" prefix=", "/>
               <choose>
                 <if match="any" variable="number">
                   <text term="issue" form="short" prefix=" " suffix=" "/>
@@ -402,11 +377,7 @@
                 </if>
               </choose>
               <text macro="date" prefix=", "/>
-              <choose>
-                <if match="any" variable="event-place">
                   <text variable="event-place" text-case="capitalize-first" prefix=", "/>
-                </if>
-              </choose>
               <choose>
                 <if match="any" variable="editor collection-editor author">
                   <text variable="publisher" text-case="capitalize-first" prefix=", "/>
@@ -419,16 +390,8 @@
                   <text macro="author"/>
               <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
               <text macro="date"/>
-              <choose>
-                <if match="any" variable="event-place">
-                  <text variable="event-place" text-case="capitalize-first" prefix=", "/>
-                </if>
-              </choose>
-              <choose>
-                <if match="any" variable="container-title">
-                  <text variable="container-title" text-case="capitalize-first" prefix=", "/>
-                </if>
-              </choose>
+              <text variable="event-place" text-case="capitalize-first" prefix=", "/>
+              <text variable="container-title" text-case="capitalize-first" prefix=", "/>
               <text macro="url"/>
             </else-if>
           </choose>
@@ -444,18 +407,12 @@
             <if type="legal_case" match="any">
               <text variable="title-short" suffix=", "/>
               <text macro="date"/>
-              <text macro="number"/>
               <text value="op. cit." font-style="italic" suffix=" note&#160;"/>
               <text variable="first-reference-note-number"/>
             </if>
             <else-if type="entry-encyclopedia entry-dictionary" match="any">
               <text macro="author"/>
               <text macro="content-title"/>
-              <choose>
-                <if match="any" variable="collection-title">
-                  <text variable="collection-title" text-case="capitalize-first" font-style="italic" suffix=", "/>
-                </if>
-              </choose>
               <text value="op. cit." font-style="italic" suffix=" note "/>
               <text variable="first-reference-note-number"/>
             </else-if>
@@ -568,33 +525,10 @@
           </choose>
           <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
           <text macro="volume" prefix="vol. " suffix=", "/>
-          <choose>
-            <if match="any" variable="event-place">
-              <text variable="event-place" text-case="capitalize-first"/>
-            </if>
-          </choose>
-          <choose>
-            <if match="any" variable="publisher">
-              <text variable="publisher" text-case="capitalize-first" prefix=", " suffix=", "/>
-            </if>
-          </choose>
-          <choose>
-            <if match="any" variable="edition">
-              <text macro="edition" suffix=", "/>
-            </if>
-          </choose>
+          <text macro="publisher"/>
+          <text macro="edition" suffix=", "/>
           <text macro="date"/>
-          <choose>
-            <if match="any" variable="collection-title">
-              <text variable="collection-title" text-case="capitalize-first" prefix=", coll. "/>
-              <choose>
-                <if match="any" variable="collection-number">
-                  <text term="issue" form="short" prefix=", "/>
-                  <text variable="collection-number" suffix=" "/>
-                </if>
-              </choose>
-            </if>
-          </choose>
+          <text macro="collection"/>
           <text macro="translator"/>
           <text macro="number-of-volumes" prefix=", "/>
           <text variable="number-of-pages" prefix=", " suffix=" pages"/>
@@ -610,32 +544,9 @@
             </if>
           </choose>
           <text variable="container-title" text-case="capitalize-first" font-style="italic"/>
-          <choose>
-            <if match="any" variable="event-place">
-              <text variable="event-place" text-case="capitalize-first" prefix=", "/>
-            </if>
-          </choose>
-          <choose>
-            <if match="any" variable="publisher">
-              <text variable="publisher" text-case="capitalize-first" prefix=", "/>
-            </if>
-          </choose>
-          <choose>
-            <if match="any" variable="collection-title">
-              <text variable="collection-title" text-case="capitalize-first" prefix=", coll. "/>
-              <choose>
-                <if match="any" variable="collection-number">
-                  <text term="issue" form="short" prefix=", "/>
-                  <text variable="collection-number" suffix=" "/>
-                </if>
-              </choose>
-            </if>
-          </choose>
-          <choose>
-            <if match="any" variable="edition">
-              <text macro="edition" prefix=", "/>
-            </if>
-          </choose>
+<text macro="publisher"/>
+          <text macro="collection"/>
+          <text macro="edition" prefix=", "/>
           <text macro="date" prefix=", "/>
           <text macro="volume" prefix=", vol. "/>
           <text macro="translator"/>
@@ -646,22 +557,9 @@
             <text macro="author-biblio"/>
           <text macro="content-title"/>
           <text term="in" font-style="italic" suffix=" "/>
-          <choose>
-            <if match="any" variable="editor collection-editor">
               <text macro="editor-biblio"/>
-            </if>
-          </choose>
           <text variable="container-title" text-case="capitalize-first" font-style="italic" suffix=", "/>
-          <choose>
-            <if match="any" variable="collection-title">
-              <text variable="collection-title" text-case="capitalize-first" font-style="italic" suffix=", "/>
-            </if>
-          </choose>
-          <choose>
-            <if match="any" variable="collection-number">
-              <text variable="collection-number" suffix=",  "/>
-            </if>
-          </choose>
+          <text macro="collection"/>
           <text macro="edition" suffix=", "/>
           <text macro="date"/>
           <text macro="volume" prefix=", vol. "/>
@@ -670,50 +568,22 @@
         </else-if>
         <else-if type="legal_case" match="any">
           <text variable="authority"/>
-          <choose>
-            <if variable="title" match="any">
               <text variable="title" font-style="italic" prefix=", "/>
               <text variable="title-short" font-style="italic" prefix=" (ci-après " suffix=")"/>
-            </if>
-            <else-if variable="title-short" match="any">
-              <text variable="title-short" font-style="italic" prefix=", "/>
-            </else-if>
-          </choose>
           <text macro="date" prefix=", "/>
           <text macro="number"/>
+          <text variable="container-title" font-style="italic" prefix=", "/>
+          <text macro="volume" prefix="vol. "/>
           <text macro="url"/>
-          <choose>
-            <if match="any" variable="container-title">
-              <text variable="container-title" font-style="italic" prefix=", "/>
-              <text macro="volume" prefix=" "/>
-            </if>
-          </choose>
         </else-if>
         <else-if type="bill legislation" match="any">
-          <choose>
-            <if match="any" variable="number">
-              <text variable="number" text-case="capitalize-first" suffix=" "/>
-            </if>
-          </choose>
-          <choose>
-            <if match="any" variable="title">
-              <text variable="title" suffix=", "/>
-            </if>
-          </choose>
-          <choose>
-            <if match="any" variable="container-title">
-              <text variable="container-title" font-style="italic" suffix=", "/>
-            </if>
-          </choose>
+          <text variable="number" text-case="capitalize-first" suffix=" "/>
+          <text variable="title" suffix=", "/>
+          <text variable="container-title" font-style="italic" suffix=", "/>
           <text macro="legislation-report"/>
           <text macro="date"/>
           <text macro="page"/>
           <text macro="url"/>
-          <choose>
-            <if match="all" variable="title-short">
-              <text variable="title-short" text-case="capitalize-first" prefix=", ci-après "/>
-            </if>
-          </choose>
         </else-if>
         <else-if type="review report" match="any">
           <choose>
@@ -728,17 +598,9 @@
             </else-if>
           </choose>
           <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
-          <choose>
-            <if match="any" variable="genre">
               <text variable="genre" suffix=", "/>
-            </if>
-          </choose>
           <text macro="date"/>
-          <choose>
-            <if match="any" variable="event-place">
               <text variable="event-place" text-case="capitalize-first" prefix=", "/>
-            </if>
-          </choose>
           <choose>
             <if match="any" variable="editor collection-editor author">
               <text variable="publisher" text-case="capitalize-first" prefix=", "/>
@@ -746,22 +608,15 @@
           </choose>
           <text macro="number"/>
           <text macro="translator"/>
+          <text variable="page" prefix=", " suffix=" pages"/>
           <text macro="url"/>
         </else-if>
         <else-if type="post-weblog webpage entry post article personal_communication" match="any">
               <text macro="author"/>
           <text variable="title" text-case="capitalize-first" font-style="italic"/>
           <text macro="date" prefix=", "/>
-          <choose>
-            <if match="any" variable="event-place">
-              <text variable="event-place" text-case="capitalize-first" prefix=", "/>
-            </if>
-          </choose>
-          <choose>
-            <if match="any" variable="container-title">
-              <text variable="container-title" text-case="capitalize-first" prefix=", "/>
-            </if>
-          </choose>
+          <text variable="event-place" text-case="capitalize-first" prefix=", "/>
+          <text variable="container-title" text-case="capitalize-first" prefix=", "/>
           <text macro="url"/>
         </else-if>
       </choose>
