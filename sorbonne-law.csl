@@ -322,11 +322,11 @@
               <text macro="content-title"/>
               <text term="in" font-style="italic" suffix=" "/>
               <text macro="editor"/>
-              <text variable="container-title" text-case="capitalize-first" font-style="italic"/>
+              <text variable="container-title" text-case="capitalize-first" font-style="italic" suffix=", "/>
               <text macro="publisher"/>
               <text macro="collection"/>
               <text macro="edition" prefix=", "/>
-              <text macro="date" prefix=", "/>
+              <text macro="date"/>
               <text macro="volume" prefix=", vol. "/>
               <text macro="translator"/>
               <text macro="page"/>
@@ -554,7 +554,7 @@
               <text macro="editor-biblio"/>
             </if>
           </choose>
-          <text variable="container-title" text-case="capitalize-first" font-style="italic"/>
+          <text variable="container-title" text-case="capitalize-first" font-style="italic" suffix=", "/>
 <text macro="publisher"/>
           <text macro="collection"/>
           <text macro="edition" prefix=", "/>
