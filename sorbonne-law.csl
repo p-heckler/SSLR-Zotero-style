@@ -436,7 +436,7 @@
                   <text variable="title" font-style="italic" suffix=", "/>
                 </else>
               </choose>
-              <text macro="volume" prefix=" vol. " suffix=", "/>
+              <text macro="volume" prefix="vol. " suffix=", "/>
               <text value="op. cit." font-style="italic" suffix=" note&#160;"/>
               <text variable="first-reference-note-number"/>
             </else-if>
