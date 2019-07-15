@@ -360,6 +360,7 @@
               <text variable="authority"/>
                   <text variable="title" font-style="italic" prefix=", "/>
                   <text variable="title-short" font-style="italic" prefix=" (ci-après " suffix=")"/>
+                  <text variable="note" prefix=", "/>
               <text macro="date" prefix=", "/>
               <text macro="number"/>
               <text variable="container-title" font-style="italic" prefix=", "/>
@@ -411,11 +412,11 @@
               <text macro="locator"/>
             </else-if>
             <else-if type="post-weblog webpage entry post article personal_communication" match="any">
-                  <text macro="author"/>
-              <text variable="title" text-case="capitalize-first" font-style="italic" suffix=", "/>
+              <text macro="author"/>
+              <text macro="content-title"/>
+              <text variable="event-place" text-case="capitalize-first"/>
+              <text macro="container-title-italic"/>
               <text macro="date"/>
-              <text variable="event-place" text-case="capitalize-first" prefix=", "/>
-              <text variable="container-title" text-case="capitalize-first" prefix=", "/>
               <text macro="url"/>
               <text macro="locator"/>
             </else-if>
@@ -597,6 +598,7 @@
           <text variable="authority"/>
               <text variable="title" font-style="italic" prefix=", "/>
               <text variable="title-short" font-style="italic" prefix=" (ci-après " suffix=")"/>
+              <text variable="note" prefix=", "/>
           <text macro="date" prefix=", "/>
           <text macro="number"/>
           <text variable="container-title" font-style="italic" prefix=", "/>
@@ -640,10 +642,10 @@
         </else-if>
         <else-if type="post-weblog webpage entry post article personal_communication" match="any">
               <text macro="author"/>
-          <text variable="title" text-case="capitalize-first" font-style="italic"/>
-          <text macro="date" prefix=", "/>
-          <text variable="event-place" text-case="capitalize-first" prefix=", "/>
-          <text variable="container-title" text-case="capitalize-first" prefix=", "/>
+              <text macro="content-title"/>
+          <text variable="event-place" text-case="capitalize-first"/>
+          <text macro="container-title-italic"/>
+          <text macro="date"/>
           <text macro="url"/>
         </else-if>
       </choose>
