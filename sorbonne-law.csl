@@ -19,6 +19,10 @@
       <term name="editor" form="short">dir.</term>
       <term name="retrieved">consulté le</term>
       <term name="presented at">thèse,</term>
+      <term name="paragraph" form="short">
+      <single>§</single>
+      <multiple>§</multiple>
+    </term>
     </terms>
   </locale>
   <locale xml:lang="en">
@@ -251,10 +255,22 @@
 </choose>
   </macro>
   <macro name="locator">
+    <choose>
+      <if variable="locator" match="any">
     <group>
 <label variable="locator" form="short" prefix=", " suffix=" "/>
   <text variable="locator"/>
 </group>
+</if>
+<else>
+  <text macro="page"/>
+</else>
+</choose>
+  </macro>
+  <macro name="opus-citatum">
+    <text value="op. cit." font-style="italic" suffix=" "/>
+    <text term="note" suffix=" "/>
+    <text variable="first-reference-note-number"/>
   </macro>
   <macro name="sort-type">
     <choose>
@@ -282,7 +298,7 @@
     </choose>
   </macro>
   <citation>
-    <layout>
+    <layout delimiter=", ">
       <choose>
         <if match="any" position="first">
           <choose>
@@ -293,7 +309,6 @@
               <text macro="date"/>
               <text macro="volume" prefix=", vol. "/>
               <text macro="issue"/>
-              <text macro="page"/>
               <text macro="url"/>
               <text macro="DOI"/>
               <text macro="locator"/>
@@ -334,11 +349,10 @@
               <text variable="container-title" text-case="capitalize-first" font-style="italic" suffix=", "/>
               <text macro="publisher"/>
               <text macro="collection"/>
-              <text macro="edition" prefix=", "/>
+              <text macro="edition" suffix=", "/>
               <text macro="date"/>
               <text macro="volume" prefix=", vol. "/>
               <text macro="translator"/>
-              <text macro="page"/>
               <text macro="url"/>
               <text macro="locator"/>
             </else-if>
@@ -352,7 +366,6 @@
               <text macro="edition" suffix=", "/>
               <text macro="date"/>
               <text macro="volume" prefix=", vol. "/>
-              <text macro="page"/>
               <text macro="url"/>
               <text macro="locator"/>
             </else-if>
@@ -365,7 +378,6 @@
               <text macro="number"/>
               <text variable="container-title" font-style="italic" prefix=", "/>
               <text macro="volume" prefix=" vol. "/>
-              <text macro="page"/>
               <text macro="url"/>
               <text macro="locator"/>
             </else-if>
@@ -432,16 +444,22 @@
         <else-if match="any" position="subsequent">
           <choose>
             <if type="legal_case" match="any">
-              <text variable="title-short" suffix=", "/>
-              <text macro="date"/>
-              <text value="op. cit." font-style="italic" suffix=" note&#160;"/>
-              <text variable="first-reference-note-number"/>
-            </if>
+              <text variable="authority" suffix=", "/>
+              <choose>
+                <if match="any" variable="title-short">
+                <text variable="title-short" font-style="italic" suffix=", "/>
+              </if>
+              <else-if variable="title" match="any">
+                <text variable="title" font-style="italic" suffix=", "/>
+              </else-if>
+              <else>
+              <text macro="date" suffix=", "/>
+            </else>
+          </choose>
+        </if>
             <else-if type="entry-encyclopedia entry-dictionary" match="any">
               <text macro="author"/>
               <text macro="content-title"/>
-              <text value="op. cit." font-style="italic" suffix=" note "/>
-              <text variable="first-reference-note-number"/>
             </else-if>
             <else-if type="book thesis" match="any">
               <text macro="author"/>
@@ -454,8 +472,6 @@
                 </else>
               </choose>
               <text macro="volume" prefix="vol. " suffix=", "/>
-              <text value="op. cit." font-style="italic" suffix=" note&#160;"/>
-              <text variable="first-reference-note-number"/>
             </else-if>
             <else-if type="article-journal article article-magazine article-newspaper chapter paper-conference" match="any">
               <text macro="author"/>
@@ -469,20 +485,16 @@
                   <text macro="content-title"/>
                 </else>
               </choose>
-              <text value="op. cit." font-style="italic" suffix=" note&#160;"/>
-              <text variable="first-reference-note-number"/>
             </else-if>
             <else-if type="bill legislation" match="any">
               <choose>
                 <if match="all" variable="title-short">
-                  <text variable="title-short" text-case="capitalize-first" font-style="normal"/>
+                  <text variable="title-short" text-case="capitalize-first" font-style="normal" suffix=", "/>
                 </if>
                 <else>
-                  <text variable="title" text-case="capitalize-first" font-style="normal"/>
+                  <text variable="title" text-case="capitalize-first" font-style="normal" suffix=", "/>
                 </else>
               </choose>
-              <text value="op. cit." font-style="italic" prefix=", " suffix=" note&#160;"/>
-              <text variable="first-reference-note-number"/>
             </else-if>
             <else-if type="report review" match="any">
               <choose>
@@ -504,10 +516,9 @@
                   <text variable="title" text-case="capitalize-first" font-style="italic" prefix=", "/>
                 </else>
               </choose>
-              <text value="op. cit." font-style="italic" prefix=", " suffix=" note "/>
-              <text variable="first-reference-note-number"/>
             </else-if>
           </choose>
+          <text macro="opus-citatum"/>
           <text macro="locator"/>
         </else-if>
       </choose>
