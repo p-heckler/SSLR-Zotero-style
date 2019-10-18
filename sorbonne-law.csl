@@ -262,9 +262,9 @@
   <text variable="locator"/>
 </group>
 </if>
-<else>
+<else-if type="bill legislation" match="none">
   <text macro="page"/>
-</else>
+</else-if>
 </choose>
   </macro>
   <macro name="opus-citatum">
@@ -272,6 +272,19 @@
     <text term="note" suffix=" "/>
     <text variable="first-reference-note-number"/>
   </macro>
+  <macro name="note">
+    <choose>
+      <if variable="author" match="any">
+          <text term="note" prefix=", " suffix=" "/>
+          <names variable="author">
+            <name et-al-min="4" et-al-use-first="4" initialize-with="." sort-separator=" ">
+              <name-part name="family" text-case="capitalize-first" font-variant="normal"/>
+            </name>
+          </names>
+      </if>
+    </choose>
+  </macro>
+
   <macro name="sort-type">
     <choose>
       <if type=" entry-encyclopedia entry-dictionary" match="any">
@@ -298,7 +311,7 @@
     </choose>
   </macro>
   <citation>
-    <layout delimiter=", ">
+    <layout delimiter="; ">
       <choose>
         <if match="any" position="first">
           <choose>
@@ -377,8 +390,9 @@
               <text macro="date" prefix=", "/>
               <text macro="number"/>
               <text variable="container-title" font-style="italic" prefix=", "/>
-              <text macro="volume" prefix=" vol. "/>
+              <text macro="volume" prefix=", vol. "/>
               <text macro="url"/>
+              <text macro="note"/>
               <text macro="locator"/>
             </else-if>
             <else-if type="bill legislation" match="any">
@@ -453,9 +467,10 @@
                 <text variable="title" font-style="italic" suffix=", "/>
               </else-if>
               <else>
-              <text macro="date" suffix=", "/>
+              <text macro="date"/>
             </else>
           </choose>
+          <text macro="note"/>
         </if>
             <else-if type="entry-encyclopedia entry-dictionary" match="any">
               <text macro="author"/>
