@@ -203,9 +203,9 @@
       <if match="any" variable="issued">
         <date form="text" variable="issued"></date>
       </if>
-      <else>
+      <else-if match="none" type="bill legislation">
         <text term="no date"/>
-      </else>
+      </else-if>
     </choose>
   </macro>
   <macro name="url">
@@ -311,7 +311,7 @@
     </choose>
   </macro>
   <citation>
-    <layout delimiter="; ">
+    <layout delimiter=" ; ">
       <choose>
         <if match="any" position="first">
           <choose>
