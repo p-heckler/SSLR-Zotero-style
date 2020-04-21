@@ -203,9 +203,9 @@
       <if match="any" variable="issued">
         <date form="text" variable="issued"></date>
       </if>
-      <else-if match="none" type="bill legislation">
+      <else>
         <text term="no date"/>
-      </else-if>
+      </else>
     </choose>
   </macro>
   <macro name="url">
