@@ -10,4 +10,4 @@
 Afin de nous aider à améliorer ce style, signalez-nous les problèmes que vous rencontrez soit directement sur Github, soit à l'adresse suivante : zotero@sorbonnestulentlawreview.org.
 
 ## Langue du style
-Quoiqu'optimisé pour le français et l'anglais, ce style s'adapte et fonctionne avec l'ensemble des locales disponibles sur https://github.com/citation-style-language/locales.
+Quoiqu'optimisé pour le français et l'anglais, ce style s'adapte et fonctionne avec l'ensemble des langues disponibles sur https://github.com/citation-style-language/locales.
