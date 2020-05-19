@@ -11,7 +11,7 @@
     <category field="law"/>
     <issn>2647-4867</issn>
     <summary>Style zotero de la revue juridique des étudiants de la Sorbonne/Zotero style of the Sorbonne Student Law Review https://sorbonnestudentlawreview.org</summary>
-    <updated>2020-04-27T12:00:00+00:00</updated>
+    <updated>2020-05-19T12:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/4.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="fr-FR">
@@ -244,7 +244,7 @@
   <text variable="locator"/>
 </group>
 </if>
-<else-if type="bill legislation review report" match="none">
+<else-if type="bill legislation" match="none">
   <text macro="page"/>
 </else-if>
 </choose>
@@ -402,7 +402,9 @@
               <text macro="legislation-report"/>
               <text macro="date"/>
               <group delimiter=" ">
+                <if match="any" variable="URL title-short"><!-- prevents locator and page from being next to each other when there is no short title AND no URL. -->
               <text macro="page"/>
+            </if>
               <text variable="title-short" text-case="capitalize-first" prefix="(" suffix=")"/>
             </group>
               <text macro="url"/>
@@ -575,7 +577,7 @@
             <text macro="issue"/>
             <text macro="url"/>
             <text macro="DOI"/>
-            <text macro="locator"/>
+            <text macro="page"/>
           </group>
           </if>
           <else-if type="thesis" match="any">
@@ -588,7 +590,7 @@
           </group>
             <text macro="date"/>
             <text macro="url"/>
-            <text macro="locator"/>
+            <text macro="number-of-pages"/>
           </group>
           </else-if>
           <else-if type="book" match="any">
@@ -602,7 +604,7 @@
             <text macro="volume"/>
             <text macro="translator"/>
             <text macro="url"/>
-            <text macro="locator"/>
+            <text macro="number-of-pages"/>
           </group>
           </else-if>
           <else-if type="chapter paper-conference" match="any">
@@ -621,7 +623,7 @@
             <text macro="volume"/>
             <text macro="translator"/>
             <text macro="url"/>
-            <text macro="locator"/>
+            <text macro="page"/>
           </group>
           </else-if>
           <else-if type="entry-encyclopedia entry-dictionary" match="any">
@@ -638,7 +640,7 @@
             <text macro="date"/>
             <text macro="volume"/>
             <text macro="url"/>
-            <text macro="locator"/>
+            <text macro="page"/>
           </group>
           </else-if>
           <else-if type="legal_case" match="any">
@@ -655,7 +657,7 @@
             <text macro="volume"/>
             <text macro="url"/>
             <text macro="note"/>
-            <text macro="locator"/>
+            <text macro="page"/>
           </group>
           </else-if>
           <else-if type="bill legislation" match="any">
@@ -672,7 +674,6 @@
             <text variable="title-short" text-case="capitalize-first" prefix="(" suffix=")"/>
           </group>
             <text macro="url"/>
-            <text macro="locator"/>
           </group>
           </else-if>
           <else-if type="review report" match="any">
@@ -700,7 +701,7 @@
             </choose>
             <text macro="translator"/>
             <text macro="url"/>
-            <text macro="locator"/>
+            <text macro="page"/>
           </group>
           </else-if>
           <else-if type="post-weblog webpage entry post article personal_communication" match="any">
@@ -711,7 +712,7 @@
             <text macro="container-title"/>
             <text macro="date"/>
             <text macro="url"/>
-            <text macro="locator"/>
+            <text macro="page"/>
           </group>
           </else-if>
         </choose>
