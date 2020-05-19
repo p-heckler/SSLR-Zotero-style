@@ -307,9 +307,9 @@
               <text macro="date"/>
               <text macro="volume"/>
               <text macro="issue"/>
+              <text macro="locator"/>
               <text macro="url"/>
               <text macro="DOI"/>
-              <text macro="locator"/>
             </group>
             </if>
             <else-if type="thesis" match="any">
@@ -335,8 +335,8 @@
               <text macro="date"/>
               <text macro="volume"/>
               <text macro="translator"/>
-              <text macro="url"/>
               <text macro="locator"/>
+              <text macro="url"/>
             </group>
             </else-if>
             <else-if type="chapter paper-conference" match="any">
@@ -354,8 +354,8 @@
               <text macro="date"/>
               <text macro="volume"/>
               <text macro="translator"/>
-              <text macro="url"/>
               <text macro="locator"/>
+              <text macro="url"/>
             </group>
             </else-if>
             <else-if type="entry-encyclopedia entry-dictionary" match="any">
@@ -371,8 +371,8 @@
               <text macro="edition"/>
               <text macro="date"/>
               <text macro="volume"/>
-              <text macro="url"/>
               <text macro="locator"/>
+              <text macro="url"/>
             </group>
             </else-if>
             <else-if type="legal_case" match="any">
@@ -387,9 +387,9 @@
               <text macro="number"/>
               <text macro="container-title"/>
               <text macro="volume"/>
-              <text macro="url"/>
               <text macro="note"/>
               <text macro="locator"/>
+              <text macro="url"/>
             </group>
             </else-if>
             <else-if type="bill legislation" match="any">
@@ -400,12 +400,12 @@
             </group>
             <text macro="container-title"/>
               <text macro="legislation-report"/>
-              <group delimiter=" ">
               <text macro="date"/>
+              <group delimiter=" ">
+              <text macro="locator"/>
               <text variable="title-short" text-case="capitalize-first" prefix="(" suffix=")"/>
             </group>
               <text macro="url"/>
-              <text macro="locator"/>
             </group>
             </else-if>
             <else-if type="review report" match="any">
@@ -432,8 +432,8 @@
                 </if>
               </choose>
               <text macro="translator"/>
-              <text macro="url"/>
               <text macro="locator"/>
+              <text macro="url"/>
             </group>
             </else-if>
             <else-if type="post-weblog webpage entry post article personal_communication" match="any">
@@ -443,8 +443,8 @@
               <text variable="event-place" text-case="capitalize-first"/>
               <text macro="container-title"/>
               <text macro="date"/>
-              <text macro="url"/>
               <text macro="locator"/>
+              <text macro="url"/>
             </group>
             </else-if>
           </choose>
@@ -572,9 +572,9 @@
             <text macro="date"/>
             <text macro="volume"/>
             <text macro="issue"/>
+            <text macro="page"/>
             <text macro="url"/>
             <text macro="DOI"/>
-            <text macro="page"/>
           </group>
           </if>
           <else-if type="thesis" match="any">
@@ -586,8 +586,8 @@
             <text variable="publisher" text-case="capitalize-first"/>
           </group>
             <text macro="date"/>
-            <text macro="url"/>
             <text macro="number-of-pages"/>
+            <text macro="url"/>
           </group>
           </else-if>
           <else-if type="book" match="any">
@@ -600,8 +600,8 @@
             <text macro="date"/>
             <text macro="volume"/>
             <text macro="translator"/>
-            <text macro="url"/>
             <text macro="number-of-pages"/>
+            <text macro="url"/>
           </group>
           </else-if>
           <else-if type="chapter paper-conference" match="any">
@@ -619,8 +619,8 @@
             <text macro="date"/>
             <text macro="volume"/>
             <text macro="translator"/>
-            <text macro="url"/>
             <text macro="page"/>
+            <text macro="url"/>
           </group>
           </else-if>
           <else-if type="entry-encyclopedia entry-dictionary" match="any">
@@ -636,8 +636,8 @@
             <text macro="edition"/>
             <text macro="date"/>
             <text macro="volume"/>
-            <text macro="url"/>
             <text macro="page"/>
+            <text macro="url"/>
           </group>
           </else-if>
           <else-if type="legal_case" match="any">
@@ -652,9 +652,9 @@
             <text macro="number"/>
             <text macro="container-title"/>
             <text macro="volume"/>
-            <text macro="url"/>
             <text macro="note"/>
             <text macro="page"/>
+            <text macro="url"/>
           </group>
           </else-if>
           <else-if type="bill legislation" match="any">
@@ -697,8 +697,8 @@
               </if>
             </choose>
             <text macro="translator"/>
-            <text macro="url"/>
             <text macro="page"/>
+            <text macro="url"/>
           </group>
           </else-if>
           <else-if type="post-weblog webpage entry post article personal_communication" match="any">
@@ -708,8 +708,8 @@
             <text variable="event-place" text-case="capitalize-first"/>
             <text macro="container-title"/>
             <text macro="date"/>
-            <text macro="url"/>
             <text macro="page"/>
+            <text macro="url"/>
           </group>
           </else-if>
         </choose>
