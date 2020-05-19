@@ -402,9 +402,11 @@
               <text macro="legislation-report"/>
               <text macro="date"/>
               <group delimiter=" ">
+                <choose>
                 <if match="any" variable="URL title-short"><!-- prevents locator and page from being next to each other when there is no short title AND no URL. -->
               <text macro="page"/>
             </if>
+          </choose>
               <text variable="title-short" text-case="capitalize-first" prefix="(" suffix=")"/>
             </group>
               <text macro="url"/>
