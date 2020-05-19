@@ -244,9 +244,9 @@
   <text variable="locator"/>
 </group>
 </if>
-<else-if type="bill legislation" match="none">
+<else>
   <text macro="page"/>
-</else-if>
+</else>
 </choose>
   </macro>
   <macro name="opus-citatum">
@@ -400,14 +400,9 @@
             </group>
             <text macro="container-title"/>
               <text macro="legislation-report"/>
-              <text macro="date"/>
               <group delimiter=" ">
-                <choose>
-                <if match="any" variable="URL title-short"><!-- prevents locator and page from being next to each other when there is no short title AND no URL. -->
-              <text macro="page"/>
+              <text macro="date"/>
               <text variable="title-short" text-case="capitalize-first" prefix="(" suffix=")"/>
-            </if>
-          </choose>
             </group>
               <text macro="url"/>
               <text macro="locator"/>
@@ -670,12 +665,12 @@
           </group>
           <text macro="container-title"/>
             <text macro="legislation-report"/>
+            <group delimiter= " ">
             <text macro="date"/>
-            <group delimiter=" ">
-            <text macro="page"/>
             <text variable="title-short" text-case="capitalize-first" prefix="(" suffix=")"/>
           </group>
             <text macro="url"/>
+            <text macro="page"/>
           </group>
           </else-if>
           <else-if type="review report" match="any">
