@@ -46,7 +46,7 @@
       </else-if>
       <else>
         <choose>
-          <if match="none" type="entry-encyclopedia entry-dictionary">
+          <if match="none" type="entry-encyclopedia entry-dictionary bill legislation">
         <text term="anonymous"/>
       </if>
     </choose>
@@ -410,6 +410,7 @@
             </else-if>
             <else-if type="bill legislation" match="any">
               <group delimiter=", ">
+                <text macro="author"/>
                 <group delimiter=" ">
               <text variable="number" text-case="capitalize-first"/>
               <text variable="title"/>
@@ -531,6 +532,7 @@
             </else-if>
             <else-if type="bill legislation" match="any">
               <group delimiter=", ">
+                <text macro="author"/>
               <choose>
                 <if match="all" variable="title-short">
                   <text variable="title-short" text-case="capitalize-first" font-style="normal"/>
@@ -675,6 +677,7 @@
           </else-if>
           <else-if type="bill legislation" match="any">
             <group delimiter=", ">
+              <text macro="author"/> <!--This field must retain the lower-case style of macro="author", not the upper-case of macro="author-biblio" -->
               <group delimiter=" ">
             <text variable="number" text-case="capitalize-first"/>
             <text variable="title"/>
