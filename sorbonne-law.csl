@@ -105,9 +105,7 @@
 </choose>
   </macro>
   <macro name="content-title">
-    <text term="open-quote"/>
-    <text variable="title"/>
-    <text term="close-quote"/>
+    <text variable="title" quotes="true"/>
   </macro>
   <macro name="container-title">
     <choose>
@@ -519,9 +517,7 @@
               <choose>
                 <if match="any" variable="title-short">
                   <group>
-                  <text term="open-quote"/>
-                  <text variable="title-short"/>
-                  <text term="close-quote"/>
+                  <text variable="title-short" quotes="true"/>
                 </group>
                 </if>
                 <else>
