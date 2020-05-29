@@ -104,6 +104,30 @@
   </if>
 </choose>
   </macro>
+  <macro name="title-short">
+    <choose>
+      <if variable="title-short" match="any">
+        <choose>
+          <if type="bill legislation" match="any">
+            <text variable="title-short" text-case="capitalize-first"/>
+          </if>
+          <else>
+        <text variable="title-short" text-case="capitalize-first" font-style="italic"/>
+      </else>
+    </choose>
+      </if>
+      <else>
+        <choose>
+          <if type="bill legislation" match="any">
+            <text variable="title" text-case="capitalize-first"/>
+</if>
+<else>
+        <text variable="title" text-case="capitalize-first" font-style="italic"/>
+      </else>
+    </choose>
+      </else>
+    </choose>
+  </macro>
   <macro name="content-title">
     <text variable="title" quotes="true"/>
   </macro>
@@ -281,6 +305,19 @@
           </names>
       </if>
     </choose>
+  </macro>
+  <macro name="disambiguate">
+    <choose>
+      <if type="book thesis" disambiguate="true">
+        <text macro="volume"/>
+      </if>
+      <else-if type="bill legislation" disambiguate="true">
+        <group delimiter=", ">
+          <text macro="container-title"/>
+            <text macro="legislation-report"/>
+          </group>
+        </else-if>
+      </choose>
   </macro>
 
   <macro name="sort-type">
@@ -477,16 +514,11 @@
             <if type="legal_case" match="any">
               <group delimiter=", ">
               <text variable="authority"/>
-              <choose>
-                <if match="any" variable="title-short">
-                <text variable="title-short" font-style="italic"/>
-              </if>
-              <else-if variable="title" match="any">
-                <text variable="title" font-style="italic"/>
-              </else-if>
-              <else>
+              <text macro="title-short"/>
+              <choose> <!-- date should always be displayed when case has no title -->
+                <if match="none" variable="title title-short">
               <text macro="date"/>
-            </else>
+            </if>
           </choose>
           <text macro="note"/>
         </group>
@@ -500,15 +532,7 @@
             <else-if type="book thesis" match="any">
               <group delimiter=", ">
               <text macro="author"/>
-              <choose>
-                <if match="any" variable="title-short">
-                  <text variable="title-short" font-style="italic"/>
-                </if>
-                <else>
-                  <text variable="title" font-style="italic"/>
-                </else>
-              </choose>
-              <text macro="volume"/>
+              <text macro="title-short"/>
             </group>
             </else-if>
             <else-if type="article-journal article article-magazine article-newspaper chapter paper-conference" match="any">
@@ -516,9 +540,7 @@
               <text macro="author"/>
               <choose>
                 <if match="any" variable="title-short">
-                  <group>
                   <text variable="title-short" quotes="true"/>
-                </group>
                 </if>
                 <else>
                   <text macro="content-title"/>
@@ -529,14 +551,7 @@
             <else-if type="bill legislation" match="any">
               <group delimiter=", ">
                 <text macro="author"/>
-              <choose>
-                <if match="all" variable="title-short">
-                  <text variable="title-short" text-case="capitalize-first" font-style="normal"/>
-                </if>
-                <else>
-                  <text variable="title" text-case="capitalize-first" font-style="normal"/>
-                </else>
-              </choose>
+              <text macro="title-short"/>
             </group>
             </else-if>
             <else-if type="report review" match="any">
@@ -552,17 +567,11 @@
                   <text variable="publisher" text-case="capitalize-first"/>
                 </else-if>
               </choose>
-              <choose>
-                <if variable="title-short" match="any">
-                  <text variable="title-short" text-case="capitalize-first" font-style="italic"/>
-                </if>
-                <else>
-                  <text variable="title" text-case="capitalize-first" font-style="italic"/>
-                </else>
-              </choose>
+              <text macro="title-short"/>
             </group>
             </else-if>
           </choose>
+          <text macro="disambiguate"/>
           <text macro="opus-citatum"/>
           <text macro="locator"/>
         </group>
