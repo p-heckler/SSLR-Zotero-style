@@ -52,7 +52,7 @@
         <text macro="editor"/>
       </if>
     </choose>
-      </else-if>
+  </else-if>
       <else>
         <choose>
           <if match="none" type="entry-encyclopedia entry-dictionary bill legislation chapter paper-conference">
@@ -208,13 +208,16 @@
   </macro>
   <macro name="content-title"> <!-- manages title variable  -->
     <choose>
-      <if type="book thesis review report" match="any">
-        <group delimiter=", ">
+      <if type="book thesis" match="any">
           <text variable="title" text-case="capitalize-first" font-style="italic"/>
-          <text variable="genre"/>
-          <text macro="number"/>
-        </group>
         </if>
+        <else-if type="review report" match="any">
+          <group delimiter=", ">
+            <text variable="title" text-case="capitalize-first" font-style="italic"/>
+            <text variable="genre"/>
+            <text macro="number"/>
+          </group>
+        </else-if>
         <else-if type="legal_case" match="any"> <!-- includes extra, date and case number to simplify <citation> and <bibliography> -->
           <group delimiter=", ">
           <text variable="title" font-style="italic"/>
@@ -246,7 +249,7 @@
   </macro>
   <macro name="publisher">
     <choose>
-      <if type="review-report" match="any">
+      <if type="review report" match="any">
         <choose>
           <if variable="author editor collection-editor" match="any"> <!-- publisher not yet included -->
             <group delimiter=", ">
