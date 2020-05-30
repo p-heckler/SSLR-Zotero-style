@@ -44,14 +44,14 @@
         <choose><!-- for chapter and paper-conference, no author implies the editor is also the author. Name should remain in editor position-->
           <if type="chapter paper-conference" match="none">
         <names variable="editor collection-editor">
-          <label form="short"/>
+          <label form="short" prefix=" (" suffix=")"/>
           </names>
       </if>
     </choose>
   </else-if>
       <else>
         <choose>
-          <if match="none" type="entry-encyclopedia entry-dictionary bill legislation chapter paper-conference review report">
+          <if match="none" type="entry-encyclopedia entry-dictionary bill legislation chapter paper-conference report">
         <text term="anonymous"/>
       </if>
     </choose>
@@ -61,9 +61,12 @@
   <macro name="editor">
     <choose>
       <if match="any" type="chapter paper-conference entry-encyclopedia entry-dictionary">
+        <group delimiter=" ">
+          <text term="in" font-style="italic"/>
     <names variable="editor collection-editor">
       <label form="short" prefix=" (" suffix=")"/>
     </names>
+  </group>
   </if>
 </choose>
   </macro>
@@ -94,14 +97,14 @@
       <name-part name="family" text-case="capitalize-first" font-variant="small-caps"/>
       <name-part name="given" text-case="capitalize-first" font-variant="normal" prefix="(" suffix=")"/>
     </name>
-      <label form="short"/>
+      <label form="short" prefix=" (" suffix=")"/>
     </names>
   </if>
 </choose>
   </else-if>
   <else>
     <choose>
-      <if match="none" type="entry-encyclopedia entry-dictionary bill legislation chapter paper-conference review report">
+      <if match="none" type="entry-encyclopedia entry-dictionary bill legislation chapter paper-conference report">
     <text term="anonymous"/>
   </if>
 </choose>
@@ -111,6 +114,8 @@
   <macro name="editor-biblio">
     <choose>
       <if match="any" type="chapter paper-conference entry-encyclopedia entry-dictionary">
+        <group delimiter=" ">
+          <text term="in" font-style="italic"/>
     <names variable="editor collection-editor">
       <name name-as-sort-order="all" sort-separator=" ">
         <name-part name="family" text-case="capitalize-first" font-variant="small-caps"/>
@@ -118,6 +123,7 @@
       </name>
       <label form="short" prefix=" (" suffix=")"/>
     </names>
+  </group>
   </if>
 </choose>
   </macro>
@@ -142,9 +148,9 @@
   </if>
 </choose>
   </macro>
-  <macro name="report-institutional-author"> <!--for reports published by institution, sets institution as author -->
+  <macro name="report-institutional-author"> <!--forreports published by institution, sets institution as author -->
     <choose>
-      <if type="review report">
+      <if type="report">
     <choose>
       <if match="none" variable="author editor collection-editor">
         <text variable="publisher" text-case="capitalize-first"/>
@@ -158,7 +164,7 @@
       <if type="book thesis" match="any">
           <text variable="title" text-case="capitalize-first" font-style="italic"/>
         </if>
-        <else-if type="review report" match="any">
+        <else-if type="report" match="any">
           <group delimiter=", ">
             <text variable="title" text-case="capitalize-first" font-style="italic"/>
             <text variable="genre"/>
@@ -213,7 +219,7 @@
     </choose>
   </else-if>
   <else> <!-- if item has no short title or title, date must be displayed for clarity -->
-    <text macro="date"/>
+    <date form="text" variable="issued"></date>
 </else>
     </choose>
   </macro>
@@ -242,7 +248,7 @@
   </macro>
   <macro name="publisher">
     <choose>
-      <if type="review report" match="any">
+      <if type="report" match="any">
         <choose>
           <if variable="author editor collection-editor" match="any"> <!-- publisher not yet included -->
             <group delimiter=", ">
@@ -327,7 +333,7 @@
   </macro>
   <macro name="number">
     <choose>
-      <if type="legal_case review report" match="any">
+      <if type="legal_case report" match="any">
     <choose>
       <if match="any" variable="number">
         <choose>
@@ -363,7 +369,7 @@
       <if match="any" variable="URL">
         <choose>
           <if match="any" variable="accessed">
-            <group delimiter=" ">
+            <group delimiter=" ">
             <text term="online"/>
             <text variable="URL"/>
             <text term="retrieved" prefix="("/>
@@ -386,13 +392,23 @@
     </choose>
   </macro>
   <macro name="page">
+    <choose>
+      <if type="report" match="none"> <!--report should return nb-of-pages, not a range -->
     <group delimiter=" ">
         <label variable="page" form="short"/>
         <text variable="page"/>
-</group>
+        </group>
+      </if>
+    </choose>
+
   </macro>
   <macro name="number-of-pages">
     <group delimiter=" ">
+      <choose>
+        <if type="report" match="any"> <!-- allows pages field in report to return nb-of-pages -->
+          <text variable="page"/>
+        </if>
+      </choose>
       <text variable="number-of-pages"/>
       <text term="number-of-pages" plural="true"/>
     </group>
@@ -462,14 +478,9 @@
               <group delimiter=", ">
                 <text macro="author"/>
                 <text macro="report-institutional-author"/>
-                <text macro="content-title"/> <!-- includes date, case number, and extra for legal_case and genre+number for review report-->
-                    <group delimiter=" ">
-                  <text term="in" font-style="italic"/>
-                      <group delimiter=", ">
+                <text macro="content-title"/> <!-- includes date, case number, and extra for legal_case and genre+number for report-->
                   <text macro="editor"/>
                   <text macro="container-title"/>
-                      </group>
-                    </group>
               <text macro="legislation-report"/>
               <text macro="thesis"/>
               <text macro="publisher"/>
@@ -524,13 +535,8 @@
           </choose>
           <text macro="report-institutional-author"/>
               <text macro="content-title"/> <!-- includes date, case number and extra for legal_case -->
-              <group delimiter=" ">
-                  <text term="in" font-style="italic"/>
-                  <text macro="editor-biblio" suffix=","/>
-                    <group delimiter=", ">
-                  <text macro="container-title"/>
-                    </group>
-              </group>
+              <text macro="editor-biblio"/>
+              <text macro="container-title"/>
               <text macro="legislation-report"/>
               <text macro="thesis"/>
               <text macro="publisher"/>
