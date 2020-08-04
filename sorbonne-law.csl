@@ -2,8 +2,11 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" et-al-min="4" et-al-use-first="1" et-al-subsequent-min="4" et-al-subsequent-use-first="1" initialize-with="." demote-non-dropping-particle="never">
   <info>
     <title>Sorbonne Student Law Review - Revue juridique des étudiants de la Sorbonne</title>
-    <id>http://www.zotero.org/styles/sorbonne-law</id>
-    <link href="http://www.zotero.org/styles/sorbonne-law" rel="self"/>
+    <title-short>SSLR</title-short>
+    <id>http://www.zotero.org/styles/sorbonne-student-law-review</id>
+    <link href="http://www.zotero.org/styles/sorbonne-student-law-review" rel="self"/>
+    <link href="https://sorbonnestudentlawreview.org/charters/charter_EN" rel="documentation"/>
+    <link href="https://sorbonnestudentlawreview.org/charters/charter_FR" rel="documentation"/>
     <author>
       <name>Paul Heckler</name>
       <email>paul.heckler@univ-paris1.fr</email>
@@ -12,7 +15,7 @@
     <issn>2647-4867</issn>
     <summary>Style zotero de la revue juridique des étudiants de la Sorbonne/Zotero style of the Sorbonne Student Law Review https://sorbonnestudentlawreview.org</summary>
     <updated>2020-05-19T12:00:00+00:00</updated>
-    <rights license="http://creativecommons.org/licenses/by-sa/4.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="fr-FR">
     <terms>
